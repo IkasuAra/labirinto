@@ -19,7 +19,7 @@ struct Objetivo{
     int posX;
     int posY;
     char forma;
-}
+};
 
 struct Personagem {
     int movX;
