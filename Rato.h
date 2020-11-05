@@ -2,6 +2,9 @@
 #define RATO_H
 
 #include "Cenario.h"
+#include <iostream>
+
+using namespace std;
 
 #define LINHA 5
 #define COLUNA 5
@@ -13,11 +16,14 @@ struct Personagem {
     bool acheiQueijo;
 };
 
+
 bool corridaRato(bool acheiQueijo, Personagem &rato, Cenario &fundo){
     if(fundo.labirinto[LINHA][COLUNA] == 'Q')
         return acheiQueijo;
-    else if(rato.movX < 0 or rato.movX >= LINHA or rato.movY < 0 or rato.movY >= COLUNA)
+    else if(rato.movX < 0 or rato.movX >= LINHA or rato.movY < 0 or rato.movY >= COLUNA){
         return false;
+        cout << "Voce esta saindo do labirinto" << endl;
+        }
     else if(fundo.labirinto[LINHA][COLUNA] != 'X')
         return false;
     else
@@ -40,5 +46,6 @@ bool corridaRato(bool acheiQueijo, Personagem &rato, Cenario &fundo){
             return false;
         }
 }
+
 
 #endif

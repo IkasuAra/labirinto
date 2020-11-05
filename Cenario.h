@@ -10,13 +10,12 @@
 using namespace std;
 
 struct Cenario{
-    char labirinto[LINHA][COLUNA] = {
-    {'X','X','X','X','X'},
-    {'X','X','X','X','X'},
-    {'X','X','X','X','X'},
-    {'X','X','X','X','X'},
-    {'X','X','X','X','X'}
-    };
+    char labirinto[LINHA][COLUNA] = 
+    {{'X','X','X','X','X'},
+     {'X','X','X','X','X'},
+     {'X','X','X','X','X'},
+     {'X','X','X','X','X'},
+     {'X','X','X','X','X'}};
 };
 
 struct Obstaculo{
@@ -39,5 +38,6 @@ void mostrarCenario(Cenario &fundo){
         cout << endl;
     }
 }
+
 
 #endif
