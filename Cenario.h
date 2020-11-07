@@ -6,11 +6,19 @@
 
 #include <iostream>
 #include <string>
+#include <time.h>
+#include <stdlib.h>
 
 using namespace std;
 
 struct Cenario{
-    char labirinto[LINHA][COLUNA] = 
+    char labirintoPossivel[LINHA][COLUNA] = 
+    {{'X','X','P','X','X'},
+     {'X','X','P','X','X'},
+     {'X','X','P','X','X'},
+     {'X','X','P','X','X'},
+     {'X','X','X','X','X'}};
+    char labirintoImpossivel[LINHA][COLUNA] =
     {{'X','X','X','X','X'},
      {'X','X','X','X','X'},
      {'X','X','X','X','X'},

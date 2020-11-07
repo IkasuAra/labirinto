@@ -22,10 +22,13 @@ int main(){
     Objetivo queijo;
     queijo.forma = 'Q';
 
-        for(int i=0; i <=3; i++){
-        fundo.labirinto[rand() % 4][rand() % 4] = parede.forma;
+    for(int i=0; i<=4; i++){
+        for(int j=0; i<=4; i++){
+            if(fundo.labirintoImpossivel[i][j] == 'E'){
+                //Verificacao para ter base sobre como colocar as paredes
+            }
         }
-        fundo.labirinto[rand() % 4][rand() % 4] = rato.forma;
+    }
     
     mostrarCenario(fundo);
     corridaRato(rato.acheiQueijo, rato, fundo);

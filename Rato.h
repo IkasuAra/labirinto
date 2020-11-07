@@ -9,7 +9,10 @@ using namespace std;
 #define LINHA 5
 #define COLUNA 5
 
+
 struct Personagem {
+    int posX;
+    int posY;
     int movX;
     int movY;
     char forma;
@@ -22,7 +25,6 @@ bool corridaRato(bool acheiQueijo, Personagem &rato, Cenario &fundo){
         return acheiQueijo;
     else if(rato.movX < 0 or rato.movX >= LINHA or rato.movY < 0 or rato.movY >= COLUNA){
         return false;
-        cout << "Voce esta saindo do labirinto" << endl;
         }
     else if(fundo.labirinto[LINHA][COLUNA] != 'X')
         return false;
