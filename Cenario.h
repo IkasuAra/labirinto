@@ -1,47 +1,41 @@
 #ifndef CENARIO_H
 #define CENARIO_H
 
-#define LINHA 5
-#define COLUNA 5
-
 #include <iostream>
 #include <string>
 #include <time.h>
 #include <stdlib.h>
 
+#define ENTRADA 'E'
+#define QUEIJO 'Q'
+#define PAREDE '#'
+#define VAZIO '.'
+#define LINHA 5
+#define COLUNA 5
+
 using namespace std;
 
 struct Cenario{
-    char labirintoPossivel[LINHA][COLUNA] = 
-    {{'X','X','P','X','X'},
-     {'X','X','P','X','X'},
-     {'X','X','P','X','X'},
-     {'X','X','P','X','X'},
-     {'X','X','X','X','X'}};
-    char labirintoImpossivel[LINHA][COLUNA] =
-    {{'X','X','X','X','X'},
-     {'X','X','X','X','X'},
-     {'X','X','X','X','X'},
-     {'X','X','X','X','X'},
-     {'X','X','X','X','X'}};
-};
-
-struct Obstaculo{
-    int posX;
-    int posY;
-    char forma;
-};
-
-struct Objetivo{
-    int posX;
-    int posY;
-    char forma;
+    char fundoLabirinto[LINHA][COLUNA];
 };
 
 void mostrarCenario(Cenario &fundo){
+    Cenario novoCenario;
+    
+    //ALGUEM PODE RANDOMIZAR A ENTRADA PQ EU QUASE SOQUEI MEU PC KSKKKSK
+
+    novoCenario.fundoLabirinto[3][2] = PAREDE;
+    novoCenario.fundoLabirinto[3][1] = PAREDE;
+    novoCenario.fundoLabirinto[3][0] = PAREDE;
+    novoCenario.fundoLabirinto[3][3] = PAREDE;
+
+
     for (int i = 0; i < LINHA; i++){
         for(int j = 0; j < COLUNA; j++){
-            cout << fundo.labirinto[i][j] << "\t" ;
+            if(novoCenario.fundoLabirinto[i][j] != PAREDE and fundo.fundoLabirinto[i][j] != ENTRADA){
+                novoCenario.fundoLabirinto[i][j] = VAZIO;
+            };
+            cout << novoCenario.fundoLabirinto[i][j] << "\t";
         }
         cout << endl;
     }
