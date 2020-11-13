@@ -8,6 +8,11 @@ using namespace std;
 
 #define LINHA 5
 #define COLUNA 5
+#define BAIXO 0
+#define CIMA 1
+#define ESQUERDA 2
+#define DIREITA 3
+#define RATO 'R'
 
 
 struct Personagem {
@@ -15,33 +20,33 @@ struct Personagem {
     int posY;
     int movX;
     int movY;
-    char forma;
     bool acheiQueijo;
 };
 
-
 bool corridaRato(bool acheiQueijo, Personagem &rato, Cenario &fundo){
-    if(fundo.labirinto[LINHA][COLUNA] == 'Q')
+    Cenario novaMovimentacao;
+
+    if(fundo.fundoLabirinto[LINHA][COLUNA] == 'Q')
         return acheiQueijo;
     else if(rato.movX < 0 or rato.movX >= LINHA or rato.movY < 0 or rato.movY >= COLUNA){
         return false;
         }
-    else if(fundo.labirinto[LINHA][COLUNA] != 'X')
+    else if(fundo.fundoLabirinto[LINHA][COLUNA] != VAZIO)
         return false;
     else
-        if(fundo.labirinto[LINHA][COLUNA] != 'P'){
+        if(fundo.fundoLabirinto[LINHA][COLUNA] != PAREDE){
                 rato.movX - 1;
                 return corridaRato(!acheiQueijo, rato, fundo);
             }
-        if(fundo.labirinto[LINHA][COLUNA] != 'P'){
+        if(fundo.fundoLabirinto[LINHA][COLUNA] != PAREDE){
                 rato.movX + 1;
                 return corridaRato(!acheiQueijo, rato, fundo);
             }
-        if(fundo.labirinto[LINHA][COLUNA] != 'P'){
+        if(fundo.fundoLabirinto[LINHA][COLUNA] != PAREDE){
                 rato.movY + 1;
                 return corridaRato(!acheiQueijo, rato, fundo);
             }
-        if(fundo.labirinto[LINHA][COLUNA] != 'P'){
+        if(fundo.fundoLabirinto[LINHA][COLUNA] != PAREDE){
                 rato.movY - 1;
                 return corridaRato(!acheiQueijo, rato, fundo);
         }else{
