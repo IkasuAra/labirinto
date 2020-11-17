@@ -7,16 +7,20 @@
 using namespace std;
 
 int main(){
+    int posicaoX, posicaoY;
+    char deOndeVeio;
 
     srand(time(NULL));
 
     Cenario fundo;
 
+    Objetivo queijo;
+    queijo.forma = QUEIJO;
+
     Personagem rato;
     rato.acheiQueijo = false;
 
-    mostrarCenario(fundo);
-    corridaRato(rato.acheiQueijo, rato, fundo);
-    
+    mostrarCenarioPossivel(fundo);
+
     return 0;
 }

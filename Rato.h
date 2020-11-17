@@ -8,51 +8,51 @@ using namespace std;
 
 #define LINHA 5
 #define COLUNA 5
-#define BAIXO 0
-#define CIMA 1
-#define ESQUERDA 2
-#define DIREITA 3
-#define RATO 'R'
+#define NORTE 4
+#define SUL 2
+#define LESTE 3
+#define OESTE 1
 
+struct Objetivo{
+    char forma;
+    int movX;
+    int movY;
+};
 
 struct Personagem {
-    int posX;
-    int posY;
     int movX;
     int movY;
     bool acheiQueijo;
 };
 
-bool corridaRato(bool acheiQueijo, Personagem &rato, Cenario &fundo){
-    Cenario novaMovimentacao;
+/*bool acharCaminhoAutomaticamente(Cenario &fundo, int posicaoX, int posicaoY, char deOndeVeio){
 
-    if(fundo.fundoLabirinto[LINHA][COLUNA] == 'Q')
-        return acheiQueijo;
-    else if(rato.movX < 0 or rato.movX >= LINHA or rato.movY < 0 or rato.movY >= COLUNA){
+    mostrarCenarioPossivel(fundo);
+
+    if(posicaoX < 0 or posicaoX >= LINHA or posicaoY < 0 or posicaoY >= COLUNA){
         return false;
-        }
-    else if(fundo.fundoLabirinto[LINHA][COLUNA] != VAZIO)
+    } else if(fundo.fundoLabirinto[posicaoX][posicaoY] == QUEIJO){
+        cout << "Voce encontrou o queijo!" << endl;
+        return true;
+    } else if(fundo.fundoLabirinto[posicaoX][posicaoY] == PAREDE or fundo.fundoLabirinto[posicaoX][posicaoY] == '+'){
         return false;
-    else
-        if(fundo.fundoLabirinto[LINHA][COLUNA] != PAREDE){
-                rato.movX - 1;
-                return corridaRato(!acheiQueijo, rato, fundo);
-            }
-        if(fundo.fundoLabirinto[LINHA][COLUNA] != PAREDE){
-                rato.movX + 1;
-                return corridaRato(!acheiQueijo, rato, fundo);
-            }
-        if(fundo.fundoLabirinto[LINHA][COLUNA] != PAREDE){
-                rato.movY + 1;
-                return corridaRato(!acheiQueijo, rato, fundo);
-            }
-        if(fundo.fundoLabirinto[LINHA][COLUNA] != PAREDE){
-                rato.movY - 1;
-                return corridaRato(!acheiQueijo, rato, fundo);
-        }else{
+    } else{
+        fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
+        if(acharCaminhoAutomaticamente(fundo, posicaoX - 1, posicaoY, deOndeVeio) && deOndeVeio != NORTE){
+            return true;
+        } else if(acharCaminhoAutomaticamente(fundo, posicaoX, posicaoY + 1, deOndeVeio) && deOndeVeio != LESTE){
+            return true;
+        } else if(acharCaminhoAutomaticamente(fundo, posicaoX + 1, posicaoY, deOndeVeio) && deOndeVeio != SUL){
+            return true;
+        } else if(acharCaminhoAutomaticamente(fundo, posicaoX, posicaoY - 1, deOndeVeio) && deOndeVeio != OESTE){
+            return true;
+        } else{
+            fundo.fundoLabirinto[posicaoX][posicaoY] = VAZIO;
             return false;
         }
-}
+        cout << "Nao foi possivel chegar ao queijo" << endl;
+    }
+}*/
 
 
 #endif
