@@ -41,7 +41,7 @@ void exibirMapa(Cenario fundo){
         cout << endl;
     }
     fflush(stdout);
-    cout << endl;
+    Sleep(1000);
 }
 void mostrarCenarioPossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
     Cenario novoCenario;
