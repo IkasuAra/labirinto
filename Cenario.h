@@ -1,10 +1,15 @@
 #ifndef CENARIO_H
 #define CENARIO_H
 
-#include <iostream>
 #include <string>
 #include <time.h>
-#include <stdlib.h>
+#ifdef _WIN32
+#include <Windows.h>
+#else
+#include <unistd.h>
+#endif
+#include <iostream>
+#include <cstdlib>
 #include "Rato.h"
 
 #define QUEIJO 'Q'
@@ -28,7 +33,17 @@ int randomX(){
 int randomY(){
     return rand() % 5;
 }
-void mostrarCenarioPossivel(Cenario &fundo){
+void exibirMapa(Cenario fundo){
+    for (int i = 0; i < LINHA; i++){
+        for(int j = 0; j < COLUNA; j++){
+            cout << fundo.fundoLabirinto[i][j] << "\t";
+        }
+        cout << endl;
+    }
+    fflush(stdout);
+    cout << endl;
+}
+void mostrarCenarioPossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
     Cenario novoCenario;
 
     novoCenario.fundoLabirinto[3][3] = PAREDE;
@@ -38,10 +53,10 @@ void mostrarCenarioPossivel(Cenario &fundo){
     novoCenario.fundoLabirinto[4][0] = QUEIJO;
 
     do{
-        int x = randomX();
-        int y = randomY();
+        posicaoX = 0;
+        posicaoY = 0;
 
-        switch (novoCenario.fundoLabirinto[x][y]){
+        switch (novoCenario.fundoLabirinto[posicaoX][posicaoY]){
             case PAREDE:
                 novoCenario.fazDenovo = true;
                 break;
@@ -51,7 +66,7 @@ void mostrarCenarioPossivel(Cenario &fundo){
                 break;
             
             default:
-                novoCenario.fundoLabirinto[x][y] = ENTRADA;
+                novoCenario.fundoLabirinto[posicaoX][posicaoY] = ENTRADA;
                 novoCenario.fazDenovo = false;
                 break;
         }
@@ -64,13 +79,11 @@ void mostrarCenarioPossivel(Cenario &fundo){
             if(novoCenario.fundoLabirinto[i][j] != PAREDE and novoCenario.fundoLabirinto[i][j] != ENTRADA and novoCenario.fundoLabirinto[i][j] != QUEIJO){
                 novoCenario.fundoLabirinto[i][j] = VAZIO;
             }
-            cout << novoCenario.fundoLabirinto[i][j] << "\t";
         }
-        cout << endl;
     }
-    fflush(stdout);
+    exibirMapa(novoCenario);
 }
-void mostrarCenarioImpossivel(Cenario &fundo){
+void mostrarCenarioImpossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
     Cenario novoCenario;
 
     novoCenario.fundoLabirinto[2][0] = PAREDE;
@@ -80,10 +93,10 @@ void mostrarCenarioImpossivel(Cenario &fundo){
     novoCenario.fundoLabirinto[4][0] = QUEIJO;
 
     do{
-        int x = randomX();
-        int y = randomY();
+        posicaoX = randomX();
+        posicaoY = randomY();
 
-        switch (novoCenario.fundoLabirinto[x][y]){
+        switch (novoCenario.fundoLabirinto[posicaoX][posicaoY]){
             case PAREDE:
                 novoCenario.fazDenovo = true;
                 break;
@@ -93,7 +106,7 @@ void mostrarCenarioImpossivel(Cenario &fundo){
                 break;
             
             default:
-                novoCenario.fundoLabirinto[x][y] = ENTRADA;
+                novoCenario.fundoLabirinto[posicaoX][posicaoY] = ENTRADA;
                 novoCenario.fazDenovo = false;
                 break;
         }
@@ -105,11 +118,9 @@ void mostrarCenarioImpossivel(Cenario &fundo){
             if(novoCenario.fundoLabirinto[i][j] != PAREDE and novoCenario.fundoLabirinto[i][j] != ENTRADA and novoCenario.fundoLabirinto[i][j] != QUEIJO){
                 novoCenario.fundoLabirinto[i][j] = VAZIO;
             }
-            cout << novoCenario.fundoLabirinto[i][j] << "\t";
         }
-        cout << endl;
     }
-    fflush(stdout);
+    exibirMapa(novoCenario);
 }
 
 

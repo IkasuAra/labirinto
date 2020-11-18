@@ -7,8 +7,8 @@
 using namespace std;
 
 int main(){
-    int posicaoX, posicaoY;
-    char deOndeVeio;
+    int posicaoX = 0, posicaoY = 0;
+    char deOndeVeio = INICIO;
 
     srand(time(NULL));
 
@@ -19,8 +19,12 @@ int main(){
 
     Personagem rato;
     rato.acheiQueijo = false;
-
-    mostrarCenarioPossivel(fundo);
+    
+    /*mostrarCenarioImpossivel(fundo, posicaoX, posicaoY);*/
+    
+    mostrarCenarioPossivel(fundo, posicaoX, posicaoY);
+    corridaRato(fundo, posicaoX, posicaoY, deOndeVeio);
+    
 
     return 0;
 }

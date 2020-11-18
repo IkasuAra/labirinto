@@ -1,10 +1,8 @@
 #ifndef RATO_H
 #define RATO_H
 
-#include "Cenario.h"
 #include <iostream>
-
-using namespace std;
+#include "Cenario.h"
 
 #define LINHA 5
 #define COLUNA 5
@@ -12,6 +10,9 @@ using namespace std;
 #define SUL 2
 #define LESTE 3
 #define OESTE 1
+#define INICIO 0
+
+using namespace std;
 
 struct Objetivo{
     char forma;
@@ -25,26 +26,30 @@ struct Personagem {
     bool acheiQueijo;
 };
 
-/*bool acharCaminhoAutomaticamente(Cenario &fundo, int posicaoX, int posicaoY, char deOndeVeio){
-
-    mostrarCenarioPossivel(fundo);
+bool corridaRato(Cenario &fundo, int posicaoX, int posicaoY, char deOndeVeio){
 
     if(posicaoX < 0 or posicaoX >= LINHA or posicaoY < 0 or posicaoY >= COLUNA){
         return false;
     } else if(fundo.fundoLabirinto[posicaoX][posicaoY] == QUEIJO){
+        fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
         cout << "Voce encontrou o queijo!" << endl;
         return true;
     } else if(fundo.fundoLabirinto[posicaoX][posicaoY] == PAREDE or fundo.fundoLabirinto[posicaoX][posicaoY] == '+'){
         return false;
     } else{
         fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
-        if(acharCaminhoAutomaticamente(fundo, posicaoX - 1, posicaoY, deOndeVeio) && deOndeVeio != NORTE){
+        exibirMapa(fundo);
+        if(deOndeVeio != NORTE and corridaRato(fundo, posicaoX + 1, posicaoY, SUL)){
+            exibirMapa(fundo);
             return true;
-        } else if(acharCaminhoAutomaticamente(fundo, posicaoX, posicaoY + 1, deOndeVeio) && deOndeVeio != LESTE){
+        } else if(deOndeVeio != LESTE and corridaRato(fundo, posicaoX, posicaoY - 1, OESTE)){
+            exibirMapa(fundo);
             return true;
-        } else if(acharCaminhoAutomaticamente(fundo, posicaoX + 1, posicaoY, deOndeVeio) && deOndeVeio != SUL){
+        } else if(deOndeVeio != SUL and corridaRato(fundo, posicaoX - 1, posicaoY, NORTE)){
+            exibirMapa(fundo);
             return true;
-        } else if(acharCaminhoAutomaticamente(fundo, posicaoX, posicaoY - 1, deOndeVeio) && deOndeVeio != OESTE){
+        } else if(deOndeVeio != OESTE and corridaRato(fundo, posicaoX, posicaoY + 1, LESTE)){
+            exibirMapa(fundo);
             return true;
         } else{
             fundo.fundoLabirinto[posicaoX][posicaoY] = VAZIO;
@@ -52,7 +57,7 @@ struct Personagem {
         }
         cout << "Nao foi possivel chegar ao queijo" << endl;
     }
-}*/
+}
 
 
 #endif
