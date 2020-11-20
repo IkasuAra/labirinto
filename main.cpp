@@ -8,6 +8,7 @@ using namespace std;
 
 int main(){
     int posicaoX = 0, posicaoY = 0;
+    int opcao;
     char deOndeVeio = INICIO;
 
     srand(time(NULL));
@@ -19,12 +20,27 @@ int main(){
 
     Personagem rato;
     rato.acheiQueijo = false;
-    
-    /*mostrarCenarioImpossivel(fundo, posicaoX, posicaoY);*/
-    
-    mostrarCenarioPossivel(fundo, posicaoX, posicaoY);
-    corridaRato(fundo, posicaoX, posicaoY, deOndeVeio);
-    
+
+    cout << "Digite 1 - para o cenario possivel ou 2 - para o cenario impossivel: ";
+    cin >> opcao;
+
+    switch(opcao){
+        case 1:
+            mostrarCenarioPossivel(fundo, posicaoX, posicaoY);
+            break;
+        case 2:
+            mostrarCenarioImpossivel(fundo, posicaoX, posicaoY);
+            break;
+        default:
+            cout << "Opcao invalida";
+    }
+
+    if(corridaRato(fundo, posicaoX, posicaoY, deOndeVeio) == true){
+        cout << "O rato retornou para a entrada" << endl;
+    }else{
+        cout << "Impossivel chegar no queijo" << endl;
+    }
+
 
     return 0;
 }

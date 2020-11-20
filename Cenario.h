@@ -33,7 +33,7 @@ int randomX(){
 int randomY(){
     return rand() % 5;
 }
-void exibirMapa(Cenario fundo){
+void exibirMapa(Cenario &fundo){
     for (int i = 0; i < LINHA; i++){
         for(int j = 0; j < COLUNA; j++){
             cout << fundo.fundoLabirinto[i][j] << "\t";
@@ -41,86 +41,85 @@ void exibirMapa(Cenario fundo){
         cout << endl;
     }
     fflush(stdout);
-    Sleep(1000);
+    cout << endl;
+    Sleep(1200);
 }
 void mostrarCenarioPossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
-    Cenario novoCenario;
 
-    novoCenario.fundoLabirinto[3][3] = PAREDE;
-    novoCenario.fundoLabirinto[3][2] = PAREDE;
-    novoCenario.fundoLabirinto[3][1] = PAREDE;
-    novoCenario.fundoLabirinto[3][0] = PAREDE;
-    novoCenario.fundoLabirinto[4][0] = QUEIJO;
-
-    do{
-        posicaoX = 0;
-        posicaoY = 0;
-
-        switch (novoCenario.fundoLabirinto[posicaoX][posicaoY]){
-            case PAREDE:
-                novoCenario.fazDenovo = true;
-                break;
-
-            case QUEIJO:
-                novoCenario.fazDenovo = true;
-                break;
-            
-            default:
-                novoCenario.fundoLabirinto[posicaoX][posicaoY] = ENTRADA;
-                novoCenario.fazDenovo = false;
-                break;
-        }
-
-    }while(novoCenario.fazDenovo);
-
-
-    for (int i = 0; i < LINHA; i++){
-        for(int j = 0; j < COLUNA; j++){
-            if(novoCenario.fundoLabirinto[i][j] != PAREDE and novoCenario.fundoLabirinto[i][j] != ENTRADA and novoCenario.fundoLabirinto[i][j] != QUEIJO){
-                novoCenario.fundoLabirinto[i][j] = VAZIO;
-            }
-        }
-    }
-    exibirMapa(novoCenario);
-}
-void mostrarCenarioImpossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
-    Cenario novoCenario;
-
-    novoCenario.fundoLabirinto[2][0] = PAREDE;
-    novoCenario.fundoLabirinto[3][0] = PAREDE;
-    novoCenario.fundoLabirinto[4][1] = PAREDE;
-    novoCenario.fundoLabirinto[3][1] = PAREDE;
-    novoCenario.fundoLabirinto[4][0] = QUEIJO;
+    fundo.fundoLabirinto[3][3] = PAREDE;
+    fundo.fundoLabirinto[3][2] = PAREDE;
+    fundo.fundoLabirinto[3][1] = PAREDE;
+    fundo.fundoLabirinto[3][0] = PAREDE;
+    fundo.fundoLabirinto[4][0] = QUEIJO;
 
     do{
         posicaoX = randomX();
         posicaoY = randomY();
 
-        switch (novoCenario.fundoLabirinto[posicaoX][posicaoY]){
+        switch (fundo.fundoLabirinto[posicaoX][posicaoY]){
             case PAREDE:
-                novoCenario.fazDenovo = true;
+                fundo.fazDenovo = true;
                 break;
 
             case QUEIJO:
-                novoCenario.fazDenovo = true;
+                fundo.fazDenovo = true;
                 break;
             
             default:
-                novoCenario.fundoLabirinto[posicaoX][posicaoY] = ENTRADA;
-                novoCenario.fazDenovo = false;
+                fundo.fundoLabirinto[posicaoX][posicaoY] = ENTRADA;
+                fundo.fazDenovo = false;
                 break;
         }
 
-    }while(novoCenario.fazDenovo);
+    }while(fundo.fazDenovo);
+
 
     for (int i = 0; i < LINHA; i++){
         for(int j = 0; j < COLUNA; j++){
-            if(novoCenario.fundoLabirinto[i][j] != PAREDE and novoCenario.fundoLabirinto[i][j] != ENTRADA and novoCenario.fundoLabirinto[i][j] != QUEIJO){
-                novoCenario.fundoLabirinto[i][j] = VAZIO;
+            if(fundo.fundoLabirinto[i][j] != PAREDE and fundo.fundoLabirinto[i][j] != ENTRADA and fundo.fundoLabirinto[i][j] != QUEIJO){
+                fundo.fundoLabirinto[i][j] = VAZIO;
             }
         }
     }
-    exibirMapa(novoCenario);
+    exibirMapa(fundo);
+}
+void mostrarCenarioImpossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
+
+    fundo.fundoLabirinto[3][2] = PAREDE;
+    fundo.fundoLabirinto[3][0] = PAREDE;
+    fundo.fundoLabirinto[4][2] = PAREDE;
+    fundo.fundoLabirinto[3][1] = PAREDE;
+    fundo.fundoLabirinto[4][0] = QUEIJO;
+
+    do{
+        posicaoX = 0;
+        posicaoY = 0;
+
+        switch (fundo.fundoLabirinto[posicaoX][posicaoY]){
+            case PAREDE:
+                fundo.fazDenovo = true;
+                break;
+
+            case QUEIJO:
+                fundo.fazDenovo = true;
+                break;
+            
+            default:
+                fundo.fundoLabirinto[posicaoX][posicaoY] = ENTRADA;
+                fundo.fazDenovo = false;
+                break;
+        }
+
+    }while(fundo.fazDenovo);
+
+    for (int i = 0; i < LINHA; i++){
+        for(int j = 0; j < COLUNA; j++){
+            if(fundo.fundoLabirinto[i][j] != PAREDE and fundo.fundoLabirinto[i][j] != ENTRADA and fundo.fundoLabirinto[i][j] != QUEIJO){
+                fundo.fundoLabirinto[i][j] = VAZIO;
+            }
+        }
+    }
+    exibirMapa(fundo);
 }
 
 

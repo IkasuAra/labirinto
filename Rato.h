@@ -32,7 +32,7 @@ bool corridaRato(Cenario &fundo, int posicaoX, int posicaoY, char deOndeVeio){
         return false;
     } else if(fundo.fundoLabirinto[posicaoX][posicaoY] == QUEIJO){
         fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
-        cout << "Voce encontrou o queijo!" << endl;
+        cout << "O rato chegou ate o queijo !" << endl << endl;
         return true;
     } else if(fundo.fundoLabirinto[posicaoX][posicaoY] == PAREDE or fundo.fundoLabirinto[posicaoX][posicaoY] == '+'){
         return false;
@@ -41,23 +41,25 @@ bool corridaRato(Cenario &fundo, int posicaoX, int posicaoY, char deOndeVeio){
         exibirMapa(fundo);
         if(deOndeVeio != NORTE and corridaRato(fundo, posicaoX + 1, posicaoY, SUL)){
             exibirMapa(fundo);
-            return true;
-        } else if(deOndeVeio != LESTE and corridaRato(fundo, posicaoX, posicaoY - 1, OESTE)){
-            exibirMapa(fundo);
-            return true;
-        } else if(deOndeVeio != SUL and corridaRato(fundo, posicaoX - 1, posicaoY, NORTE)){
-            exibirMapa(fundo);
+            fundo.fundoLabirinto[posicaoX][posicaoY] = '*';
             return true;
         } else if(deOndeVeio != OESTE and corridaRato(fundo, posicaoX, posicaoY + 1, LESTE)){
             exibirMapa(fundo);
+            fundo.fundoLabirinto[posicaoX][posicaoY] = '*';
+            return true;
+        } else if(deOndeVeio != LESTE and corridaRato(fundo, posicaoX, posicaoY - 1, OESTE)){
+            exibirMapa(fundo);
+            fundo.fundoLabirinto[posicaoX][posicaoY] = '*';
+            return true;
+        } else if(deOndeVeio != SUL and corridaRato(fundo, posicaoX - 1, posicaoY, NORTE)){
+            exibirMapa(fundo);
+            fundo.fundoLabirinto[posicaoX][posicaoY] = '*';
             return true;
         } else{
-            fundo.fundoLabirinto[posicaoX][posicaoY] = VAZIO;
+            fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
             return false;
         }
-        cout << "Nao foi possivel chegar ao queijo" << endl;
     }
 }
-
 
 #endif
