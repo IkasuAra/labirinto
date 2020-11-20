@@ -85,15 +85,15 @@ void mostrarCenarioPossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
 }
 void mostrarCenarioImpossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
 
-    fundo.fundoLabirinto[3][2] = PAREDE;
-    fundo.fundoLabirinto[3][0] = PAREDE;
     fundo.fundoLabirinto[4][2] = PAREDE;
+    fundo.fundoLabirinto[3][0] = PAREDE;
+    fundo.fundoLabirinto[4][1] = PAREDE;
     fundo.fundoLabirinto[3][1] = PAREDE;
     fundo.fundoLabirinto[4][0] = QUEIJO;
 
     do{
-        posicaoX = 0;
-        posicaoY = 0;
+        posicaoX = randomX();
+        posicaoY = randomY();
 
         switch (fundo.fundoLabirinto[posicaoX][posicaoY]){
             case PAREDE:
