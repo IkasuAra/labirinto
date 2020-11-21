@@ -21,7 +21,8 @@ int main(){
     Personagem rato;
     rato.acheiQueijo = false;
 
-    cout << "Digite 1 - para o cenario possivel ou 2 - para o cenario impossivel: ";
+    cout << "Digite uma das opcoes: " << endl;
+    cout << "1 - Cenario possivel \n2 - Cenario impossivel ";
     cin >> opcao;
 
     switch(opcao){
@@ -35,10 +36,10 @@ int main(){
             cout << "Opcao invalida";
     }
 
-    if(corridaRato(fundo, posicaoX, posicaoY, deOndeVeio) == true){
-        cout << "O rato retornou para a entrada" << endl;
+    if(corridaRato(fundo, posicaoX, posicaoY, deOndeVeio)){
+        cout << "O rato retornou para a entrada!" << endl;
     }else{
-        cout << "Impossivel chegar no queijo" << endl;
+        cout << "Impossivel chegar no queijo!" << endl;
     }
 
 

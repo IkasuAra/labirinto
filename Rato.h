@@ -28,35 +28,45 @@ struct Personagem {
 
 bool corridaRato(Cenario &fundo, int posicaoX, int posicaoY, char deOndeVeio){
 
-    if(posicaoX < 0 or posicaoX >= LINHA or posicaoY < 0 or posicaoY >= COLUNA){
+    if(posicaoX < 0 or posicaoX >= LINHA or posicaoY < 0 or posicaoY >= COLUNA)
         return false;
-    } else if(fundo.fundoLabirinto[posicaoX][posicaoY] == QUEIJO){
+    
+    else if(fundo.fundoLabirinto[posicaoX][posicaoY] == QUEIJO){
+        fundo.fundoLabirinto[posicaoX][posicaoY] = 'R';
+        cout << "O rato chegou ate o queijo!" << endl << endl;
         fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
-        cout << "O rato chegou ate o queijo !" << endl << endl;
         return true;
-    } else if(fundo.fundoLabirinto[posicaoX][posicaoY] == PAREDE or fundo.fundoLabirinto[posicaoX][posicaoY] == '+'){
+
+    }else if(fundo.fundoLabirinto[posicaoX][posicaoY] == PAREDE or fundo.fundoLabirinto[posicaoX][posicaoY] == 'R')
         return false;
-    } else{
-        fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
+    else{
+        if(fundo.fundoLabirinto[posicaoX][posicaoY] != ENTRADA)
+            fundo.fundoLabirinto[posicaoX][posicaoY] = 'R';
+        
         exibirMapa(fundo);
+        
         if(deOndeVeio != NORTE and corridaRato(fundo, posicaoX + 1, posicaoY, SUL)){
             exibirMapa(fundo);
-            fundo.fundoLabirinto[posicaoX][posicaoY] = '*';
-            return true;
-        } else if(deOndeVeio != OESTE and corridaRato(fundo, posicaoX, posicaoY + 1, LESTE)){
-            exibirMapa(fundo);
-            fundo.fundoLabirinto[posicaoX][posicaoY] = '*';
-            return true;
-        } else if(deOndeVeio != LESTE and corridaRato(fundo, posicaoX, posicaoY - 1, OESTE)){
-            exibirMapa(fundo);
-            fundo.fundoLabirinto[posicaoX][posicaoY] = '*';
-            return true;
-        } else if(deOndeVeio != SUL and corridaRato(fundo, posicaoX - 1, posicaoY, NORTE)){
-            exibirMapa(fundo);
-            fundo.fundoLabirinto[posicaoX][posicaoY] = '*';
-            return true;
-        } else{
             fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
+            return true;
+        
+        }else if(deOndeVeio != OESTE and corridaRato(fundo, posicaoX, posicaoY + 1, LESTE)){
+            exibirMapa(fundo);
+            fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
+            return true;
+        
+        }else if(deOndeVeio != LESTE and corridaRato(fundo, posicaoX, posicaoY - 1, OESTE)){
+            exibirMapa(fundo);
+            fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
+            return true;
+        
+        }else if(deOndeVeio != SUL and corridaRato(fundo, posicaoX - 1, posicaoY, NORTE)){
+            exibirMapa(fundo);
+            fundo.fundoLabirinto[posicaoX][posicaoY] = '+';
+            return true;
+        
+        }else{
+            fundo.fundoLabirinto[posicaoX][posicaoY] = 'R';
             return false;
         }
     }

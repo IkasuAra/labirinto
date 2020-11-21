@@ -5,8 +5,6 @@
 #include <time.h>
 #ifdef _WIN32
 #include <Windows.h>
-#else
-#include <unistd.h>
 #endif
 #include <iostream>
 #include <cstdlib>
@@ -26,6 +24,7 @@ struct Cenario{
     char fundoLabirinto[LINHA][COLUNA];
     bool fazDenovo = false;
 };
+
 int randomX(){
     return rand() % 5;  
 }
@@ -33,6 +32,7 @@ int randomX(){
 int randomY(){
     return rand() % 5;
 }
+
 void exibirMapa(Cenario &fundo){
     for (int i = 0; i < LINHA; i++){
         for(int j = 0; j < COLUNA; j++){
@@ -40,12 +40,24 @@ void exibirMapa(Cenario &fundo){
         }
         cout << endl;
     }
-    fflush(stdout);
     cout << endl;
+    fflush(stdout);
     Sleep(1200);
 }
-void mostrarCenarioPossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
 
+void montarMapa(Cenario &fundo){
+    for (int i = 0; i < LINHA; i++){
+        for(int j = 0; j < COLUNA; j++){
+            if(fundo.fundoLabirinto[i][j] != PAREDE and fundo.fundoLabirinto[i][j] != ENTRADA and fundo.fundoLabirinto[i][j] != QUEIJO){
+                fundo.fundoLabirinto[i][j] = VAZIO;
+            }
+        }
+    }
+    exibirMapa(fundo);
+}
+
+void mostrarCenarioPossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
+    
     fundo.fundoLabirinto[3][3] = PAREDE;
     fundo.fundoLabirinto[3][2] = PAREDE;
     fundo.fundoLabirinto[3][1] = PAREDE;
@@ -73,15 +85,7 @@ void mostrarCenarioPossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
 
     }while(fundo.fazDenovo);
 
-
-    for (int i = 0; i < LINHA; i++){
-        for(int j = 0; j < COLUNA; j++){
-            if(fundo.fundoLabirinto[i][j] != PAREDE and fundo.fundoLabirinto[i][j] != ENTRADA and fundo.fundoLabirinto[i][j] != QUEIJO){
-                fundo.fundoLabirinto[i][j] = VAZIO;
-            }
-        }
-    }
-    exibirMapa(fundo);
+    montarMapa(fundo);
 }
 void mostrarCenarioImpossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
 
@@ -111,15 +115,8 @@ void mostrarCenarioImpossivel(Cenario &fundo, int &posicaoX, int &posicaoY){
         }
 
     }while(fundo.fazDenovo);
-
-    for (int i = 0; i < LINHA; i++){
-        for(int j = 0; j < COLUNA; j++){
-            if(fundo.fundoLabirinto[i][j] != PAREDE and fundo.fundoLabirinto[i][j] != ENTRADA and fundo.fundoLabirinto[i][j] != QUEIJO){
-                fundo.fundoLabirinto[i][j] = VAZIO;
-            }
-        }
-    }
-    exibirMapa(fundo);
+    
+    montarMapa(fundo);
 }
 
 

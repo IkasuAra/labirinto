@@ -1,5 +1,7 @@
 # labirinto
 
+Atividade realizada no curso de ciência da computação na Universidade Anhembi Morumbi
+
 Ivo Eduardo Assis Ruiz 
 21371036
 
